@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>«Little Bit» — українські локалізації ігор</title>
+  <meta name="description" content="«Little Bit» — українські локалізації відеоігор: Judgment, Yakuza, No More Heroes, Deadly Premonition, HOTEL BARCELONA, JoJo's Bizarre Adventure: All-Star Battle R." />
+  <meta name="theme-color" content="#0b1220"/>
+  <link rel="icon" type="image/x-icon" href="logo.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1220;
+      --text: #f5f7fb;
+      --muted: #cdd4e1;
+      --glass: rgba(255,255,255,.06);
+      --brd: rgba(255,255,255,.12);
+      --accent: #f43f5e;
+      --accent-2: #06b6d4;
+      --accent-10: rgba(244,63,94,.10);
+      --accent-30: rgba(244,63,94,.30);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', sans-serif;
+      color:var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: .1px;
+    }
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .bg{position:fixed; inset:0; z-index:-3;
+      background:
+        radial-gradient(1100px 700px at 10% 10%, #14203b 0%, transparent 60%),
+        radial-gradient(900px 550px at 85% 15%, #0f172a 0%, transparent 55%),
+        radial-gradient(1000px 800px at 20% 90%, #0a0f1d 0%, transparent 60%);
+    }
+    .blob{position:absolute; filter: blur(64px); opacity:.55; mix-blend-mode:screen; animation:float 18s ease-in-out infinite;}
+    .blob.one{ width: 460px; height:460px; left:-80px; top:-60px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .blob.two{ width: 560px; height:560px; right:-120px; top:18vh; background:linear-gradient(135deg, var(--accent-2), var(--accent)); animation-delay: -6s; }
+    .blob.three{ width: 520px; height:520px; left:22vw; bottom:-140px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); animation-delay: -3s; }
+    @keyframes float{ 0%,100%{ transform:translateY(0) translateX(0) scale(1)} 50%{ transform:translateY(-26px) translateX(10px) scale(1.05)} }
+    @media (prefers-reduced-motion: reduce){ .blob{animation:none} }
+    header{position:sticky; top:0; z-index:40; background: linear-gradient(180deg, rgba(10,16,29,.75), rgba(10,16,29,.35));
+      -webkit-backdrop-filter: blur(14px) saturate(120%); backdrop-filter: blur(14px) saturate(120%); border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{max-width:1200px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; gap:12px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.4px; font-size:18px}
+    .spacer{flex:1}
+    .nav-links{display:flex; gap:8px}
+    .nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; transition:all .25s}
+    .nav a:hover{color:var(--text); background:rgba(255,255,255,0.06)}
+    .lang{display:flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,.15); padding:4px; border-radius:999px; background:rgba(255,255,255,.06)}
+    .lang .lang-btn{ background:transparent; border:none; color:var(--text); font-weight:700; padding:6px 8px; border-radius:999px; display:flex; align-items:center; gap:6px; cursor:pointer; opacity:.75 }
+    .lang .lang-btn.active{ background:rgba(255,255,255,.12); opacity:1 }
+    .burger{display:none; background:transparent; border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:8px; color:var(--text); align-items:center; justify-content:center;}
+    .burger svg{width:22px; height:22px; display:block}
+    .burger .icon-x{display:none}
+    .burger.active .icon-bars{display:none}
+    .burger.active .icon-x{display:block}
+    .burger svg path{ stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .drawer{position:fixed; inset:0 0 0 auto; width:78%; max-width:320px; transform:translateX(100%); transition:transform .25s ease;
+      background:rgba(13,18,34,.95); border-left:1px solid rgba(255,255,255,.08); z-index:50; display:flex; flex-direction:column}
+    .drawer.open{transform:translateX(0)}
+    .drawer .head{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.06)}
+    .drawer .links{display:flex; flex-direction:column; padding:10px}
+    .drawer .links a{padding:12px 12px; border-radius:12px; margin:4px 0; color:var(--text); text-decoration:none; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08)}
+    .drawer .lang{ margin:10px; align-self:flex-start }
+    .backdrop{position:fixed; inset:0; background:rgba(2,6,23,.55); opacity:0; visibility:hidden; transition:all .25s; z-index:45}
+    .backdrop.show{opacity:1; visibility:visible}
+    .container{max-width:1200px; margin:0 auto; padding:56px 20px}
+    .glass{background: var(--glass); border: 1px solid var(--brd); border-radius: 18px; -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); box-shadow: 0 10px 50px rgba(2,6,23,.32), inset 0 1px 0 rgba(255,255,255,0.06)}
+    .hero{ display:grid; grid-template-columns: 1fr; gap:22px; align-items:center; padding:22px; position:relative; overflow:hidden }
+    .hero h1{ font-size: clamp(28px, 3.6vw, 48px); margin:0 0 6px 0; line-height:1.05 }
+    .hero .lead{ color:var(--muted); font-size: clamp(16px, 2.1vw, 18px); line-height:1.7 }
+    .pill{display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px; background: rgba(125,211,252,.10); border:1px solid rgba(125,211,252,.30); color:var(--text); font-weight:700; font-size:12px}
+    .cta{display:flex; gap:12px; margin-top:12px; flex-wrap:wrap}
+    .btn{padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); color:var(--text); text-decoration:none; display:inline-flex; gap:10px; align-items:center; transition:transform .2s, background .2s, border-color .2s}
+    .btn.primary{background:linear-gradient(135deg, rgba(125,211,252,.28), rgba(167,139,250,.28)); border-color: rgba(167,139,250,.55)}
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,0.35)}
+    .btn.disabled{background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); border:1px solid rgba(255,255,255,0.12); cursor:not-allowed; pointer-events:none; user-select:none;}
+    .swatches{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .swatches button{width:28px; height:28px; border-radius:8px; border:1px solid rgba(255,255,255,.22); background:#111827; padding:0; cursor:pointer}
+    .swatches button[data-accent="violet"]{ background: linear-gradient(135deg, #a78bfa, #7dd3fc) }
+    .swatches button[data-accent="emerald"]{ background: linear-gradient(135deg, #34d399, #60a5fa) }
+    .swatches button[data-accent="rose"]{ background: linear-gradient(135deg, #f43f5e, #06b6d4) }
+    .swatches button[data-accent="amber"]{ background: linear-gradient(135deg, #f59e0b, #22d3ee) }
+    h2{font-size: clamp(22px, 3vw, 32px); margin:0 0 18px}
+    .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:14px; align-items:stretch; }
+    .card{ overflow:hidden; position:relative; display:flex; flex-direction:column; contain: paint; }
+    .thumb{ position:relative; aspect-ratio: 16/9; background:#0f172a; overflow:hidden; cursor:pointer }
+    .thumb img{ width:100%; height:100%; object-fit:cover; opacity:.92; transform: scale(1.02); transition:transform .5s ease }
+    @media (hover:hover) and (pointer:fine){ .card:hover .thumb img{ transform: scale(1.07) } }
+    .thumb::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:42%; background:linear-gradient(to top, rgba(2,6,23,.82), rgba(2,6,23,0)); pointer-events:none; }
+    .thumb .logo{ position:absolute; left:12px; bottom:12px; max-width:70%; max-height:48%; height:auto; width:auto; object-fit:contain; filter: drop-shadow(0 10px 18px rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(255,255,255,.12)); pointer-events:none; user-select:none; }
+    .badge{position:absolute; top:12px; left:12px; background:rgba(2,6,23,.55); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:6px 10px; font-size:12px; font-weight:700} .badge.right{left:auto; right:12px} .badges-right{position:absolute; top:12px; right:12px; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:70%} .badges-right .badge{position:static} .badge.right{left:auto; right:12px}
+    .content{ padding:14px 14px 16px; display:grid; grid-template-rows: auto 1fr auto auto auto; gap:8px; flex:1; }
+    .content h3{margin:0; font-size:18px}
+    .content p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
+    .progress{ height:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:999px; overflow:hidden; position:relative }
+    .progress > span{ display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width:0; transition: width 1200ms cubic-bezier(.2,.7,.2,1) }
+    .progress > span::after{ content:""; position:absolute; inset:0; background: linear-gradient(120deg, rgba(255,255,255,0) 45%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 55%); mix-blend-mode: screen; transform: translateX(-100%); animation: sheen 2.6s linear infinite; pointer-events: none; }
+    @keyframes sheen{ to{ transform: translateX(100%) } }
+    .toolbar{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:8px 0 16px }
+    .toolbar .search{ flex:1; min-width:220px; position:relative }
+    .toolbar input[type="search"]{ width:100%; padding:10px 12px 10px 34px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--text) }
+    .toolbar .icon{ position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:14px; opacity:.7 }
+    .chips{ display:flex; gap:6px; flex-wrap:wrap }
+    .chip{ border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--text); padding:8px 10px; border-radius:999px; font-size:13px; cursor:pointer; user-select:none }
+    .chip.active{ background:rgba(255,255,255,.16) }
+    .no-results{ margin:10px 0; padding:12px; border-radius:12px; background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.35); color:#fecaca }
+    .stats{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:10px }
+    .stat{ padding:14px; border:1px solid var(--brd); border-radius:14px; background:rgba(255,255,255,.05); text-align:center }
+    .stat .num{ font-size:22px; font-weight:800 }
+    .stat .sub{ font-size:12px; color:var(--muted) }
+    footer{ color:#93a4bc; padding:30px 0 60px; font-size:13px; text-align:center }
+    /* --- Modal --- */
+    body.modal-open{ overflow:hidden }
+    .modal{ position:fixed; inset:0; z-index:60; display:none; align-items:center; justify-content:center }
+    .modal.open{ display:flex }
+    .modal__overlay{ position:absolute; inset:0; background:rgba(2,6,23,.65) }
+    .modal__dialog{ position:relative; z-index:1; width:min(1020px, 94vw); max-height:88vh; display:grid; grid-template-rows:auto auto auto 1fr; gap:0; background:var(--glass); border:1px solid var(--brd); border-radius:18px; box-shadow:0 14px 60px rgba(2,6,23,.45); overflow:hidden }
+    .modal__close{ position:absolute; top:10px; right:10px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px; cursor:pointer }
+    .modal__header{ display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom:1px solid var(--brd) }
+    .modal__logo{ width:auto; height:40px; object-fit:contain; max-width:50% }
+    .modal__title{ font-size:18px; font-weight:800 }
+    .modal__desc{ padding:10px 14px; color:var(--muted); border-bottom:1px solid var(--brd); line-height:1.6 }
+    .modal__links{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--brd) }
+    .steam-link{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; color:var(--text); text-decoration:none; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12) }
+    .steam-link:hover{ border-color:rgba(255,255,255,.35) }
+    .steam-link svg{ width:18px; height:18px; display:block; fill:currentColor }
+    .modal__body{ padding:12px; overflow:auto; display:grid; gap:12px }
+    .carousel{ position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#0f172a; border:1px solid var(--brd) }
+    .carousel img{ width:100%; height:100%; object-fit:cover }
+    .carousel .nav{ position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding:0 8px; pointer-events:none }
+    .carousel .nav button{ pointer-events:all; width:40px; height:40px; border-radius:999px; border:1px solid rgba(255,255,255,.22); background:rgba(2,6,23,.55); color:var(--text); cursor:pointer }
+    .video-grid{ display:grid; grid-template-columns: 1fr; gap:12px }
+    .video-grid iframe{ width:100%; aspect-ratio:16/9; border:1px solid var(--brd); border-radius:10px; background:#0b1220 }
+    @media (min-width: 920px){ .hero{ grid-template-columns: 1.2fr .8fr; } }
+    @media (max-width: 860px){
+      .nav-links{ display:none } .burger{display:inline-flex}
+      header{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,16,29,0.9) }
+      .drawer{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(13,18,34,.96) }
+      .glass{ -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(255,255,255,0.06); box-shadow: 0 6px 24px rgba(2,6,23,.25), inset 0 1px 0 rgba(255,255,255,0.04) }
+      .blob{ display:none }
+    }
+    .btn.download-anim{
+      position:relative; overflow:hidden; isolation:isolate;
+      background:linear-gradient(135deg, rgba(125,211,252,.28), rgba(167,139,250,.28));
+      border-color: rgba(167,139,250,.55);
+      animation: lb-pulseGlow 2.6s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+    .btn.download-anim:hover{ transform: translateY(-2px) scale(1.02); }
+    .btn.download-anim::after{ content:""; position:absolute; top:0; bottom:0; left:-160%; width:140%; transform: skewX(-20deg);
+      background: linear-gradient(120deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.35) 50%, rgba(255,255,255,0) 65%);
+      animation: lb-sweep 3.2s ease-in-out infinite; pointer-events:none; mix-blend-mode: screen; }
+    @keyframes lb-pulseGlow{
+      0%,100%{ box-shadow: 0 0 0 1px rgba(167,139,250,.65), 0 0 0 0 rgba(125,211,252,0), 0 10px 28px rgba(2,6,23,.30); }
+      50%{ box-shadow: 0 0 0 1px rgba(167,139,250,.95), 0 0 24px 10px rgba(125,211,252,.16), 0 14px 34px rgba(2,6,23,.45); }
+    }
+    @keyframes lb-sweep{ 0%{ left:-160% } 55%{ left:120% } 100%{ left:120% } }
+    @media (prefers-reduced-motion: reduce){ .btn.download-anim{ animation:none } .btn.download-anim::after{ animation:none } }
+  
+#benefactors .chip { cursor: default; }
+
+/* removed-old-youtube-outline */
+.btn.youtube-outline{
+  background: transparent !important;
+  color: var(--accent-600, #e11d48) !important;        /* rose-600 fallback */
+  border: 2px solid var(--accent-600, #e11d48) !important;
+}
+.btn.youtube-outline:hover{
+  background: color-mix(in srgb, var(--accent-600, #e11d48) 10%, transparent);
+}
+
+/* YouTube primary (like Telegram, but red/accent) */
+.btn.youtube-primary{
+  background: linear-gradient(135deg, var(--accent-10, rgba(244,63,94,.10)), var(--accent-30, rgba(244,63,94,.30)));
+  border-color: color-mix(in srgb, var(--accent, #f43f5e), #ffffff 35%);
+}
+/* Preserve the same hover/transition feel as .btn.primary */
+.btn.youtube-primary:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent, #f43f5e), #ffffff 50%);
+}
+</style>
+
+<style id="perf-card-override">
+/* PERF override: do not change visuals, just isolate layout & skip offscreen paint */
+:where(.card){
+  contain: content;
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+}
+</style>
+
+
+<style id="perf-anim-patch">
+@media (prefers-reduced-motion: no-preference){
+  [data-anim]{ animation-play-state: paused !important; }
+  [data-anim].is-visible{ animation-play-state: running !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+}
+html[data-tab-hidden="true"] [data-anim]{ animation-play-state: paused !important; }
+[data-anim].will-animate{ backface-visibility: hidden; transform: translateZ(0); }
+</style>
+
+<script type="module" defer>
+  import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+  polyfillCountryFlagEmojis();
+</script>
+<style>
+  /* Use the polyfill font only where needed */
+  .flag, .emoji-flag { 
+    font-family: "Twemoji Country Flags", "Segoe UI Emoji", system-ui, sans-serif; 
+  }
+</style>
+<!-- Uniform flag rendering across browsers via Twemoji (SVG) -->
+<script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const targets = document.querySelectorAll('.flag, .emoji-flag');
+  targets.forEach(el => {
+    const txt = el.textContent;
+    // Replace only if there's at least one regional-indicator pair (flag emoji)
+    if (/\uD83C[\uDDE6-\uDDFF]\uD83C[\uDDE6-\uDDFF]/.test(txt)) {
+      el.innerHTML = twemoji.parse(txt.trim(), {
+        folder: 'svg',
+        ext: '.svg',
+        base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+      });
+    }
+  });
+});
+</script>
+<style>
+.flag img.emoji, .emoji-flag img.emoji { 
+  height: 1em; width: auto; vertical-align: -0.15em;
+}
+</style>
+</head>
+<body>
+  <div class="bg">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+  </div>
+
+  <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+  <aside id="drawer" class="drawer" aria-hidden="true" aria-label="Мобільне меню">
+    <div class="head">
+      <div style="font-weight:800" data-i18n="drawer_title">Меню</div>
+      <button id="closeDrawer" aria-label="Закрити" class="burger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="links">
+      <a href="#projects" data-i18n="nav_projects">Наші проєкти</a>
+      <a href="#contacts" data-i18n="nav_contacts">Контакти</a>
+      <a href="#support" data-i18n="nav_support">Фінансова підтримка</a>
+      <a href="#benefactors" data-i18n="nav_benefactors">Доброчинці</a>
+      <div class="lang" id="langSwitchDrawer" aria-label="Language switcher">
+        <button type="button" class="lang-btn" data-lang="uk" aria-label="Українська"><span class="flag">🇺🇦</span><span>UA</span></button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English"><span class="flag">🇬🇧</span><span>EN</span></button>
+      </div>
+    </div>
+  </aside>
+
+  <header>
+    <nav class="nav">
+      <div class="brand"> «Little Bit»</div>
+      <div class="spacer"></div>
+      <div class="nav-links">
+        <a href="#projects" data-i18n="nav_projects">Наші проєкти</a>
+        <a href="#contacts" data-i18n="nav_contacts">Контакти</a>
+        <a href="#support" data-i18n="nav_support">Фінансова підтримка</a>
+      
+        <a href="#benefactors" data-i18n="nav_benefactors">Доброчинці</a>
+      </div>
+      <div class="lang" id="langSwitch" aria-label="Language switcher">
+        <button type="button" class="lang-btn" data-lang="uk" aria-label="Українська"><span class="flag">🇺🇦</span><span>UA</span></button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English"><span class="flag">🇬🇧</span><span>EN</span></button>
+      </div>
+      <button id="openDrawer" class="burger" aria-label="Відкрити меню" aria-controls="drawer" aria-expanded="false" type="button">
+        <svg class="icon-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="icon-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="container">
+      <div class="hero glass">
+        <div>
+          <h1>«Little Bit»</h1>
+          <h1 data-i18n="hero_title2">Грайте українською — відчувайте по-новому.</h1>
+          <p class="lead" data-i18n="hero_lead">Улюблені історії — українською, від серця.</p>
+<div class="stats" aria-label="Статистика сайту">
+            <div class="stat">
+              <div class="num" id="statProjects">—</div>
+              <div class="sub" data-i18n="stat_projects">проєктів у переліку</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="statAvg">—</div>
+              <div class="sub" data-i18n="stat_avg">середня готовність</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="statEA">—</div>
+              <div class="sub" data-i18n="stat_early">ранній доступ</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass" style="padding:16px">
+          <h2 style="margin:6px 0 10px" data-i18n="what_we_do_title">Що ми робимо</h2>
+          <ul style="margin:0; padding-left:18px; line-height:1.8; color:var(--muted)">
+            <li data-i18n="li1">Повна текстова локалізація (інтерфейс, субтитри, навчальні матеріали/туторіали, внутрішньоігрові тексти)</li>
+            <li data-i18n="li2">Підтримка та інтеграція шрифтів, технічний супровід</li>
+            <li data-i18n="li3">Художня адаптація з дотриманням чинного українського правопису</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container" style="scroll-margin-top:80px">
+      <h2 data-i18n="projects_title">Наші проєкти</h2>
+      <div class="toolbar">
+        <div class="search" role="search">
+          <span class="icon">🔎</span>
+          <label class="visually-hidden" for="projSearch" data-i18n="search_label">Пошук проєкту</label>
+          <input id="projSearch" type="search" inputmode="search" placeholder="Пошук проєкту…" data-i18n-placeholder="search_placeholder" aria-controls="projectsGrid" aria-label="Пошук проєкту" />
+        </div>
+        <div class="chips" id="chips">
+          <button class="chip active" data-filter="all"   data-i18n="filter_all">Усе</button>
+          <button class="chip" data-filter="in-progress"  data-i18n="filter_in">У процесі</button>
+          <button class="chip" data-filter="fundraising"  data-i18n="filter_fund">Збір коштів</button>
+          <button class="chip" data-filter="early-access" data-i18n="filter_ea">Ранній доступ</button>
+        </div>
+      </div>
+      <p id="searchMeta" style="color:var(--muted); font-size:13px; margin:6px 2px 12px"></p>
+      <div id="noResults" class="no-results" hidden data-i18n="no_results">Нічого не знайдено за цим запитом.</div>
+      <div class="grid" id="projectsGrid" aria-live="polite"></div>
+    </section>
+
+    <section id="contacts" class="container" style="scroll-margin-top:80px">
+      <div class="glass" style="padding:20px">
+        <h2 style="margin-top:0" data-i18n="contacts_title">Контакти</h2>
+        <p style="color:var(--muted)" data-i18n="contacts_text">Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://t.me/LittleBitUA" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn primary youtube-primary" href="https://www.youtube.com/@UA_LittleBit" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="container" style="scroll-margin-top:80px">
+      <div class="glass" style="padding:20px">
+        <h2 style="margin-top:0" data-i18n="support_title">Фінансова підтримка</h2>
+        <p style="color:var(--muted)" data-i18n="support_text">Якщо подобається наша робота, можна підтримати нас донатом:</p>
+        <div class="cta">
+          <a class="btn primary" href="https://donatello.to/LittleBitUA" target="_blank" rel="noopener">Donatello</a>
+        </div>
+      </div>
+    </section>
+  
+    <section id="benefactors" class="container" style="scroll-margin-top:80px">
+      <div class="glass" style="padding:20px">
+        <h2 style="margin-top:0" data-i18n="benefactors_title">Доброчинці</h2>
+        <p style="color:var(--muted)" data-i18n="benefactors_desc">Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:</p>
+        <div class="chips" aria-label="Список доброчинців">
+          <span aria-disabled="true" tabindex="-1" class="chip" style="border-color:#fbbf24;background:rgba(251,191,36,.15)">👑 <strong>VADKO</strong></span>
+          <span aria-disabled="true" tabindex="-1" class="chip" style="border-color:#34d399;background:rgba(52,211,153,.15)">👑 <strong>Хоук</strong></span>
+		  <span aria-disabled="true" tabindex="-1" class="chip" style="border-color:#34d399;background:rgba(52,211,153,.15)">🦩 <strong>Hlamingo</strong></span>
+          <span aria-disabled="true" tabindex="-1" class="chip">BreadHood</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">grafdralkuma</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Мимокрокодил</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Volodymyr</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">anonymous</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Дмитро</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Македонський</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Рома</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Jobitronik</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">AlviSeed</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">HorseBH</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Владислав</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Nodertuk</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Артур К</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Валто</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Uatarasas</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">smutok</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Костянтин</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">SPOQ</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">Віталій</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Fan</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Сатаносексуалка</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">UnknownTheHero</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Нудьга</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">YarosTop1GG</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Павло</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Kazeiro Artist💗</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Jean Kartösciante</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">JoJo</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Окунь</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Мухобієчка</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">beesexyial</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Володимир</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Бісик</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Ігор Д.</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Олексій Мороз</span>
+          <span aria-disabled="true" tabindex="-1" class="chip">SpY_129</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Billey</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Іван Кіпрв</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">KAREMBO</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">соня</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">rage</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Бурʼян</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">LoydiN</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Андрійко</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Смуток</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Misha</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Мемна Арта</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Микита</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Мирослав Сеник</span>
+		  <span aria-disabled="true" tabindex="-1" class="chip">Andryxa</span>
+		  
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <!-- Project modal -->
+  <div id="projectModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog glass">
+      <button class="modal__close" type="button" aria-label="Закрити" data-close>
+        ✕
+      </button>
+      <div class="modal__header">
+        <img id="pmLogo" class="modal__logo" alt="">
+        <div id="pmTitle" class="modal__title"></div>
+      </div>
+      <div id="pmDesc" class="modal__desc"></div>
+      <div id="pmLinks" class="modal__links"></div>
+      <div class="modal__body">
+        <div id="pmCarousel" class="carousel" hidden>
+          <img id="pmCarouselImg" alt="">
+          <div class="nav">
+            <button id="pmPrev" type="button" aria-label="Попереднє зображення">‹</button>
+            <button id="pmNext" type="button" aria-label="Наступне зображення">›</button>
+          </div>
+        </div>
+        <div id="pmVideos" class="video-grid"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // --- Data ---
+    let PROJECTS = [];
+
+    const I18N = {
+      uk:{ title:'«Little Bit» — українські локалізації ігор',
+        meta_desc:'«Little Bit» — українські локалізації відеоігор: Judgment, Yakuza, No More Heroes, Deadly Premonition.',
+        nav_projects:'Наші проєкти', nav_contacts:'Контакти', nav_support:'Фінансова підтримка',
+        drawer_title:'Меню', drawer_label:'Мобільне меню', open_menu:'Відкрити меню', close_menu:'Закрити меню',
+        pill_subtitle:'UA Localizations', hero_title2:'Грайте українською — відчувайте по-новому.', hero_lead:'Улюблені історії — українською, від серця.',
+        what_we_do_title:'Що ми робимо', li1:'Повна текстова локалізація (інтерфейс, субтитри, навчальні матеріали/туторіали, внутрішньоігрові тексти)',
+        li2:'Підтримка та інтеграція шрифтів, технічний супровід', li3:'Художня адаптація з дотриманням чинного українського правопису',
+        projects_title:'Наші проєкти', badge_in_progress:'У процесі локалізації', badge_fundraising:'Збір на локалізацію', badge_early_access:'Ранній доступ',
+        btn_download:'Завантажити', btn_sponsor:'Спонсорувати', btn_view_projects:'До проєктів', btn_support:'Підтримати',
+        status_fundraising:'Статус: <strong>збір коштів</strong>', raised_prefix:'Зібрано:', search_label:'Пошук проєкту', search_placeholder:'Пошук проєкту...',
+        no_results:'Нічого не знайдено за цим запитом.', search_found:(n)=>`Знайдено: ${n}`, filter_all:'Усе', filter_in:'У процесі', filter_fund:'Збір коштів', filter_ea:'Ранній доступ',
+        stat_projects:'проєктів у переліку', stat_avg:'середня готовність', stat_early:'ранній доступ', accent_label:'Стиль:', rights:'Усі права захищено.', nav_benefactors:'Доброчинці', benefactors_title:'Доброчинці', benefactors_desc:'Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:', support_title:'Фінансова підтримка', support_text:'Якщо подобається наша робота, можна підтримати нас донатом:', contacts_title:'Контакти', contacts_text:'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.'},
+      en:{ title:'“Little Bit” — Ukrainian Game Localizations', meta_desc:'“Little Bit” — Ukrainian localizations of video games: Judgment, Yakuza, No More Heroes.',
+        nav_projects:'Our Projects', nav_contacts:'Contacts', nav_support:'Support Us', drawer_title:'Menu', drawer_label:'Mobile menu', open_menu:'Open menu', close_menu:'Close menu',
+        pill_subtitle:'UA Localizations', hero_title2:'Play in Ukrainian — feel it anew.', hero_lead:'Your favorite stories — in Ukrainian, from the heart.',
+        what_we_do_title:'What We Do', li1:'Full text localization (UI, subtitles, tutorials, in-game materials)', li2:'Font support and technical integration', li3:'Creative adaptation following contemporary Ukrainian orthography',
+        projects_title:'Our Projects', badge_in_progress:'In localization', badge_fundraising:'Fundraising', badge_early_access:'Early Access', btn_download:'Download', btn_sponsor:'Sponsor',
+        btn_view_projects:'See projects', btn_support:'Support us', status_fundraising:'Status: <strong>fundraising</strong>', raised_prefix:'Raised:', search_label:'Project search', search_placeholder:'Search project…',
+        no_results:'No results for this query.', search_found:(n)=>`Found: ${n}`, filter_all:'All', filter_in:'In progress', filter_fund:'Fundraising', filter_ea:'Early access',
+        stat_projects:'projects listed', stat_avg:'average progress', stat_early:'early access', accent_label:'Accent:', rights:'All rights reserved.', nav_benefactors:'Benefactors', benefactors_title:'Benefactors', benefactors_desc:'This is a list of everyone who has ever supported our work — we are truly grateful:'}
+    };
+
+    // --- Helpers ---
+    function detectInitialLang(){
+      try{
+        const saved = localStorage.getItem('lb_lang');
+        if (saved && (saved === 'uk' || saved === 'en')) return saved;
+      }catch(e){}
+      const navLang = (navigator.languages && navigator.languages[0] || navigator.language || '').toLowerCase();
+      if (navLang.indexOf('uk')===0 || navLang.indexOf('ua')===0) return 'uk';
+      return 'en';
+    }
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    function formatUA(n){ return (Number(n)||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+    function norm(s){
+      try {
+        return (s||'')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g,'')  // remove combining marks (compatible)
+          .replace(/[^\w\s]/g,' ')
+          .replace(/\s+/g,' ')
+          .trim();
+      } catch(e){
+        return (s||'').toLowerCase().replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();
+      }
+    }
+
+    // --- Accent ---
+    function setAccent(a){
+      const root=document.documentElement;
+      if (a==='emerald'){ root.style.setProperty('--accent','#34d399'); root.style.setProperty('--accent-2','#60a5fa'); }
+      else if (a==='rose'){ root.style.setProperty('--accent','#f43f5e'); root.style.setProperty('--accent-2','#06b6d4'); }
+      else if (a==='amber'){ root.style.setProperty('--accent','#f59e0b'); root.style.setProperty('--accent-2','#22d3ee'); }
+      else { root.style.setProperty('--accent','#7dd3fc'); root.style.setProperty('--accent-2','#a78bfa'); a='violet'; }
+      try{ localStorage.setItem('lb_accent', a); }catch(e){}
+    }
+
+    // --- Language ---
+    function applyLang(lang){
+      if (!I18N[lang]) lang='uk';
+      document.documentElement.lang=lang;
+      const dict = I18N[lang];
+      document.title = dict.title;
+      const m=document.querySelector('meta[name="description"]'); if (m) m.setAttribute('content', dict.meta_desc);
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key=el.getAttribute('data-i18n'); const val=dict[key];
+        if (typeof val==='string') el.innerHTML=val;
+      });
+      // placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+        const key=el.getAttribute('data-i18n-placeholder'); const val=dict[key];
+        if (typeof val==='string') el.setAttribute('placeholder', val);
+      });
+      // burger aria
+      const burger=document.getElementById('openDrawer');
+      if (burger){
+        burger.setAttribute('aria-label', burger.classList.contains('active')? dict.close_menu : dict.open_menu);
+      }
+      // drawer label
+      const drawer=document.getElementById('drawer'); if (drawer) drawer.setAttribute('aria-label', dict.drawer_label);
+      // active lang buttons
+      document.querySelectorAll('.lang .lang-btn').forEach(btn=>btn.classList.toggle('active', btn.dataset.lang===lang));
+    }
+    function setLang(lang){
+      try{ localStorage.setItem('lb_lang', lang); }catch(e){}
+      applyLang(lang);
+      renderProjects(filteredNow());
+      // update modal static labels if open
+      if (document.body.classList.contains('modal-open')){
+        const closeBtn=document.querySelector('#projectModal .modal__close');
+        if (closeBtn) closeBtn.setAttribute('aria-label', lang==='en'?'Close':'Закрити');
+      }
+    }
+
+    // --- Cards ---
+    function badgeText(status){
+      const d=I18N[document.documentElement.lang||'uk'];
+      return status==='in-progress'? d.badge_in_progress : status==='fundraising'? d.badge_fundraising : status==='early-access'? d.badge_early_access : '';
+    }
+    function platformBadges(p){
+      const arr = Array.isArray(p.platforms) ? p.platforms : (p.platform ? [p.platform] : []);
+      if (!arr.length) return '';
+      return arr.map(pl => '<span class="badge right">['+pl+']</span>').join('');
+    }
+
+    function projectCard(p){
+      const lang=document.documentElement.lang||'uk';
+      const d=I18N[lang];
+      const desc= lang==='en'? p.desc_en : p.desc_uk;
+      const pct=clamp(Math.round(p.progress||0),0,100);
+      const fundraising = p.status==='fundraising' && (p.goal>0);
+      const raisedLabel = fundraising ? `${d.raised_prefix} ${formatUA(p.raised||0)}₴ \\ ${formatUA(p.goal||0)}₴` : null;
+      const label = (p.cta?.label_uk && lang==='uk')? p.cta.label_uk : (p.cta?.label_en && lang==='en')? p.cta.label_en : (lang==='uk'? d.btn_download : 'Download');
+      const cls = ['btn']; if (p.cta?.primary) cls.push('primary'); if (p.cta?.animated) cls.push('download-anim'); if (p.cta?.type==='disabled') cls.push('disabled');
+      const href = p.cta?.url || '#';
+      const attrs = (p.cta?.type==='disabled') ? 'aria-disabled="true" tabindex="-1"' : 'target="_blank" rel="noopener"';
+      return `
+        <article class="card glass" data-id="${p.id}" data-status="${p.status}" data-title="${p.title}">
+          <div class="thumb" role="button" aria-label="Відкрити подробиці проєкту">
+            <img src="${p.cover}" data-role="cover" loading="lazy" alt="" aria-hidden="true">
+            <img class="logo" src="${p.logo}" alt="" aria-hidden="true" loading="lazy">
+            <span class="badge">${badgeText(p.status)}</span>\n            
+            <div class="badges-right">${platformBadges(p)}</div>
+          </div>
+          <div class="content">
+            <h3>${p.title}</h3>
+            <p>${desc}</p>
+            <div class="progress" title="${(lang==='en'?'Progress':'Готовність')} ${pct}%"><span style="width:${pct}%"></span></div>
+            ${fundraising ? `<small style="color:var(--muted)">${raisedLabel}</small>` : `<small style="color:var(--muted)">${(lang==='en'?'Progress:':'Готовність:')} <strong>${pct}%</strong></small>`}
+            <div class="cta"><a class="${cls.join(' ')}" href="${href}" ${attrs}>${label}</a></div>
+          </div>
+        </article>`;
+    }
+    function updateStats(list){
+      // Average readiness should include ONLY actual localization progress,
+      // i.e. statuses "in-progress" and "early-access".
+      // Fundraising cards are excluded from the average because their "progress"
+      // represents donation progress, not localization readiness.
+      const count = list.length; // how many cards are currently listed (any status)
+      const eligible = list.filter(p => p.status === 'in-progress' || p.status === 'early-access');
+      const totalEligible = eligible.length;
+      const avg = totalEligible ? Math.round(eligible.reduce((a,p)=>a+(p.progress||0),0)/totalEligible) : 0;
+      const ea = list.filter(p=>p.status==='early-access').length;
+      const sp=document.getElementById('statProjects'), sa=document.getElementById('statAvg'), se=document.getElementById('statEA');
+      if (sp) sp.textContent=count;
+      if (sa) sa.textContent=avg+'%';
+      if (se) se.textContent=ea;
+    }
+    function renderProjects(list){
+      const grid=document.getElementById('projectsGrid'); if (!grid) return;
+      grid.innerHTML=list.map(projectCard).join('');
+      requestAnimationFrame(()=>{
+        document.querySelectorAll('.progress > span').forEach(el=>{
+          const w=el.style.width||'0%'; el.style.width='0%'; requestAnimationFrame(()=>{ el.style.width=w; });
+        });
+      });
+      updateStats(list);
+      const meta=document.getElementById('searchMeta');
+      const fn= I18N[document.documentElement.lang||'uk'].search_found;
+      if (meta) meta.textContent = (typeof fn==='function'? fn(list.length) : String(fn).replace('{n}', String(list.length)));
+      const nr=document.getElementById('noResults'); if (nr) nr.hidden = list.length!==0;
+      // bind click openers
+      grid.querySelectorAll('.card .thumb').forEach(el=>{
+        el.addEventListener('click', (e)=>{
+          const card=e.currentTarget.closest('.card');
+          const id=card?.dataset.id; if(!id) return;
+          const proj = PROJECTS.find(p=>p.id===id); if (!proj) return;
+          const vids = Array.isArray(proj.videos_ua) ? proj.videos_ua : [];
+          const imgs = Array.isArray(proj.images_ua) ? proj.images_ua : [];
+          if (vids.length===0 && imgs.length===0){
+            // Placeholder action when no media available
+            try { window.location.hash = '#'; } catch(e) {}
+            return;
+          }
+          openProjectModal(proj);
+        }, { once:false });
+      });
+    }
+
+    // --- Modal logic ---
+    let CAROUSEL_INDEX=0;
+    function setModalOpen(open){
+      const modal=document.getElementById('projectModal'); if (!modal) return;
+      modal.classList.toggle('open', !!open);
+      document.body.classList.toggle('modal-open', !!open);
+      modal.setAttribute('aria-hidden', open? 'false':'true');
+      const backdrop=document.getElementById('backdrop');
+      if (backdrop) backdrop.classList.toggle('show', !!open);
+    }
+    function buildSteamLink(p){
+      let url = p && p.steam;
+      const hasSteam = Array.isArray(p?.platforms) && p.platforms.includes('Steam');
+      if (!url && hasSteam && p?.title){
+        const q = encodeURIComponent(p.title);
+        url = `https://store.steampowered.com/search/?term=${q}`;
+      }
+      if (!url) return '';
+      return `<a class="steam-link" href="${url}" target="_blank" rel="noopener">${steamIcon()}<span>Steam</span></a>`;
+    }
+    function steamIcon(){
+      return `<svg viewBox="0 0 24 24" aria-hidden="true" role="img"><path d="M20.5 3.5a4.5 4.5 0 0 0-6.266 5.662l-4.527 3.254a3.25 3.25 0 1 0 1.108 3.84l4.527-3.254A4.5 4.5 0 1 0 20.5 3.5Zm-3.75 1.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM7.5 16.25a1.75 1.75 0 1 1-.001-3.5 1.75 1.75 0 0 1 .001 3.5Z"/></svg>`;
+    }
+    function ytEmbed(id){
+      return `<iframe src="https://www.youtube.com/embed/${id}" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
+    }
+    let CAROUSEL_IMAGES = [];
+    function openProjectModal(p){
+      const lang=document.documentElement.lang||'uk';
+      const desc = lang==='en'? p.desc_en : p.desc_uk;
+      const titleEl=document.getElementById('pmTitle');
+      const logoEl=document.getElementById('pmLogo');
+      const descEl=document.getElementById('pmDesc');
+      const linksEl=document.getElementById('pmLinks');
+      const car=document.getElementById('pmCarousel');
+      const carImg=document.getElementById('pmCarouselImg');
+      const vids=document.getElementById('pmVideos');
+      // set header
+      titleEl.textContent=p.title||'';
+      logoEl.src=p.logo||''; logoEl.alt=p.title||'';
+      // description
+      descEl.innerHTML = desc||'';
+      // links: Steam
+      linksEl.innerHTML = buildSteamLink(p);
+      // images carousel
+      const images = Array.isArray(p.images_ua)? p.images_ua : [];
+      CAROUSEL_IMAGES = images;
+      if (images.length){
+        CAROUSEL_INDEX=0;
+        car.hidden=false;
+        carImg.src = images[0];
+      } else {
+        car.hidden=true;
+        carImg.removeAttribute('src');
+      }
+      // videos
+      vids.innerHTML='';
+      const vidsUa = Array.isArray(p.videos_ua)? p.videos_ua : [];
+      vidsUa.forEach(v=>{
+        const id = (v||'').match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/); const vid=id? id[1] : null;
+        if (vid) vids.insertAdjacentHTML('beforeend', ytEmbed(vid));
+      });
+      // bind arrows
+      document.getElementById('pmPrev').onclick = ()=>{ if (!CAROUSEL_IMAGES.length) return; CAROUSEL_INDEX=(CAROUSEL_INDEX-1+CAROUSEL_IMAGES.length)%CAROUSEL_IMAGES.length; carImg.src=CAROUSEL_IMAGES[CAROUSEL_INDEX]; };
+      document.getElementById('pmNext').onclick = ()=>{ if (!CAROUSEL_IMAGES.length) return; CAROUSEL_INDEX=(CAROUSEL_INDEX+1)%CAROUSEL_IMAGES.length; carImg.src=CAROUSEL_IMAGES[CAROUSEL_INDEX]; };
+      // open
+      setModalOpen(true);
+    }
+    // close interactions
+    document.addEventListener('click', (e)=>{
+      if (e.target && e.target.hasAttribute('data-close')){ 
+        try{ const wrap=document.getElementById('pmVideos'); if (wrap) wrap.innerHTML=''; }catch(e){}
+        try{ document.querySelectorAll('#projectModal video, #projectModal audio').forEach(el=>{ try{ el.pause(); el.currentTime=0; }catch(_){}}); }catch(e){}
+        setModalOpen(false); 
+      }
+    });
+    window.addEventListener('keydown', (e)=>{
+      if (e.key==='Escape') { 
+        try{ const wrap=document.getElementById('pmVideos'); if (wrap) wrap.innerHTML=''; }catch(e){}
+        try{ document.querySelectorAll('#projectModal video, #projectModal audio').forEach(el=>{ try{ el.pause(); el.currentTime=0; }catch(_){}}); }catch(e){}
+        setModalOpen(false); return; 
+      }
+      const modalOpen = document.body.classList.contains('modal-open');
+      if (!modalOpen) return;
+      if (e.key==='ArrowLeft' || e.key==='ArrowRight'){
+        const img=document.getElementById('pmCarouselImg');
+        if (!img || !CAROUSEL_IMAGES.length) return;
+        if (e.key==='ArrowLeft') CAROUSEL_INDEX=(CAROUSEL_INDEX-1+CAROUSEL_IMAGES.length)%CAROUSEL_IMAGES.length;
+        else CAROUSEL_INDEX=(CAROUSEL_INDEX+1)%CAROUSEL_IMAGES.length;
+        img.src = CAROUSEL_IMAGES[CAROUSEL_INDEX];
+      }
+    });
+
+    // --- Filters + Search ---
+    let CURRENT_FILTER='all';
+    function filteredNow(){
+      const input=document.getElementById('projSearch');
+      const q = input? norm(input.value) : '';
+      return PROJECTS.filter(p=>{
+        const ok = (CURRENT_FILTER==='all') || p.status===CURRENT_FILTER;
+        const text = (document.documentElement.lang==='en' ? p.title+' '+p.desc_en : p.title+' '+p.desc_uk).toLowerCase();
+        return ok && (!q || text.includes(q));
+      });
+    }
+    function applyFilters(){ renderProjects(filteredNow()); }
+
+    // --- Drawer controls (avoid clobbering window.open/close) ---
+    const drawerEl=document.getElementById('drawer');
+    const backdrop=document.getElementById('backdrop');
+    const openBtn=document.getElementById('openDrawer');
+    const closeBtn=document.getElementById('closeDrawer');
+    function openDrawerMenu(){
+      if (!drawerEl||!backdrop||!openBtn) return;
+      drawerEl.classList.add('open'); backdrop.classList.add('show'); openBtn.classList.add('active');
+      openBtn.setAttribute('aria-expanded','true'); openBtn.setAttribute('aria-label', I18N[document.documentElement.lang].close_menu);
+      drawerEl.setAttribute('aria-hidden','false'); backdrop.setAttribute('aria-hidden','false');
+    }
+    function closeDrawerMenu(){
+      if (!drawerEl||!backdrop||!openBtn) return;
+      drawerEl.classList.remove('open'); backdrop.classList.remove('show'); openBtn.classList.remove('active');
+      openBtn.setAttribute('aria-expanded','false'); openBtn.setAttribute('aria-label', I18N[document.documentElement.lang].open_menu);
+      drawerEl.setAttribute('aria-hidden','true'); backdrop.setAttribute('aria-hidden','true');
+    }
+    openBtn?.addEventListener('click', ()=>{ if (drawerEl.classList.contains('open')) closeDrawerMenu(); else openDrawerMenu(); });
+    closeBtn?.addEventListener('click', closeDrawerMenu);
+    backdrop?.addEventListener('click', closeDrawerMenu);
+    window.addEventListener('keydown', (e)=>{ if (e.key==='Escape') closeDrawerMenu(); });
+
+    // --- Delegation: language, accent, chips ---
+    document.addEventListener('click', (e)=>{
+      const langBtn=e.target.closest('.lang-btn[data-lang]'); if (langBtn){ e.preventDefault(); setLang(langBtn.dataset.lang); }
+const chip=e.target.closest('.chip'); if (chip){ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c===chip)); CURRENT_FILTER=chip.dataset.filter; applyFilters(); }
+    });
+
+    // --- Search init ---
+    (function initSearch(){
+      const input=document.getElementById('projSearch'); if (!input) return;
+      let tId=null;
+      function onInput(){ clearTimeout(tId); tId=setTimeout(()=>applyFilters(),80); }
+      input.addEventListener('input', onInput);
+      input.addEventListener('keydown', (e)=>{ if (e.key==='Escape'){ input.value=''; applyFilters(); }});
+    })();
+
+    // --- Init ---
+    (function init(){
+      const lang = detectInitialLang();
+      document.documentElement.lang = lang;
+      // Accent (fixed to "rose")
+      setAccent("rose");
+      // Texts
+      applyLang(lang);
+      // Load projects from external JSON then render
+      fetch('./project.json', { cache: 'no-store' })
+        .then(res => res.json())
+        .then(data => { PROJECTS = Array.isArray(data) ? data : []; renderProjects(PROJECTS); })
+        .catch(() => { PROJECTS = []; renderProjects(PROJECTS); });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <footer>
+    © <span id="year"></span> «Little Bit». <span data-i18n="rights">Усі права захищено.</span>
+  </footer>
+
+
+<script>
+(function(){
+  var scope = document.getElementById('benefactors');
+  if(!scope) return;
+  // Make sure chips can't be tab-focused (redundant safety)
+  scope.querySelectorAll('.chip').forEach(function(el){
+    el.setAttribute('aria-disabled','true');
+    el.setAttribute('tabindex','-1');
+  });
+  // Stop clicks on benefactor chips from triggering any global handlers
+  scope.addEventListener('click', function(e){
+    if (e.target && e.target.closest('.chip')) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }, true);
+})();
+</script>
+
+
+<script id="perf-defer-images">
+(function(){
+  function onReady(fn){ if (document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  onReady(function(){
+    var grid = document.getElementById('projectsGrid');
+    if (!grid) return;
+
+    // 1) Prioritize first two covers
+    var covers = grid.querySelectorAll('.thumb img');
+    for (var i=0;i<covers.length;i++){
+      var img = covers[i];
+      var role = img.getAttribute('data-role') || '';
+      if (role !== 'cover') continue;
+      img.setAttribute('decoding','async'); // safe even if set
+      img.setAttribute('loading', i<2 ? 'eager' : 'lazy');
+      if (i<2) img.setAttribute('fetchpriority','high'); else img.setAttribute('fetchpriority','low');
+      if (!img.getAttribute('width')){ img.setAttribute('width','1280'); img.setAttribute('height','720'); }
+    }
+
+    // 2) Animate progress bars only when visible
+    var bars = grid.querySelectorAll('.progress > span');
+    var animate = function(el){ var w=el.style.width||'0%'; el.style.width='0%'; requestAnimationFrame(function(){ el.style.width=w; }); };
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ animate(e.target); io.unobserve(e.target); } });
+      }, {rootMargin:'120px 0px'});
+      bars.forEach ? bars.forEach(function(b){ io.observe(b); }) : Array.prototype.forEach.call(bars, function(b){ io.observe(b); });
+    } else {
+      requestAnimationFrame(function(){ Array.prototype.forEach.call(bars, animate); });
+    }
+  });
+})();
+</script>
+
+
+<script id="sw-reg">
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+<script id="perf-anim-manager">
+(function(){
+  if (!('getComputedStyle' in window)) return;
+  function onReady(fn){ if (document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  onReady(function(){
+    var animated=[], all = document.querySelectorAll('body *');
+    for (var i=0;i<all.length;i++){
+      var el = all[i]; var cs = getComputedStyle(el);
+      if (cs.animationName && cs.animationName !== 'none'){ el.setAttribute('data-anim',''); animated.push(el); }
+    }
+    function onEnter(el){ el.classList.add('is-visible','will-animate'); requestAnimationFrame(function(){ el.classList.remove('will-animate'); }); }
+    function onExit(el){ el.classList.remove('is-visible'); }
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        for (var j=0;j<entries.length;j++){ var e=entries[j]; if (e.isIntersecting) onEnter(e.target); else onExit(e.target); }
+      }, {rootMargin:'200px 0px', threshold:0.01});
+      animated.forEach ? animated.forEach(function(el){ io.observe(el); }) : Array.prototype.forEach.call(animated, function(el){ io.observe(el); });
+    } else { animated.forEach ? animated.forEach(onEnter) : Array.prototype.forEach.call(animated, onEnter); }
+  });
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) document.documentElement.setAttribute('data-tab-hidden','true');
+    else document.documentElement.removeAttribute('data-tab-hidden');
+  });
+})();
+</script>
+
+
+<script>
+// Ensure Contacts / Support / Footer rights always localized even if I18N keys are missing
+(function(){
+  const MAP = {
+    uk: {
+      contacts_title: 'Контакти',
+      contacts_text: 'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.',
+      support_title: 'Фінансова підтримка',
+      support_text: 'Якщо подобається наша робота, можна підтримати нас донатом:',
+      rights: 'Усі права захищено.'
+    },
+    en: {
+      contacts_title: 'Contacts',
+      contacts_text: 'Got a question, want to help, or propose a collaboration? Message us on Telegram or subscribe on YouTube.',
+      support_title: 'Financial Support',
+      support_text: 'If you like our work, you can support us with a donation:',
+      rights: 'All rights reserved.'
+    }
+  };
+  if (typeof window.applyLang === 'function'){
+    const __origApply = window.applyLang;
+    window.applyLang = function(lang){
+      __origApply(lang);
+      const dict = MAP[lang] || MAP.uk;
+      function setI18N(selector, key){
+        const el = document.querySelector(selector);
+        if (el && dict[key]) el.innerHTML = dict[key];
+      }
+      setI18N('[data-i18n="contacts_title"]','contacts_title');
+      setI18N('[data-i18n="contacts_text"]','contacts_text');
+      setI18N('[data-i18n="support_title"]','support_title');
+      setI18N('[data-i18n="support_text"]','support_text');
+      setI18N('[data-i18n="rights"]','rights');
+    };
+    // Re-apply for the current language so UI updates immediately
+    try{ window.applyLang(document.documentElement.lang || 'uk'); }catch(_){}
+  }
+})();
+</script>
+
+</body>
+</html>
