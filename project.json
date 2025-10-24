@@ -6,7 +6,7 @@
     "logo": "assets/Dispatch_logo.webp",
     "status": "in-progress",
     "progress": 38,
-    "progress_text": 80,
+    "progress_text": 85,
     "progress_textures": 0,
     "progress_fonts": 50,
     "desc_uk": "<strong>Українська локалізація першого епізоду.</strong> Інтерфейс і субтитри.",
