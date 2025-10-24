@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
         status_fundraising:'Статус: <strong>збір коштів</strong>', raised_prefix:'Зібрано:', search_label:'Пошук проєкту', search_placeholder:'Пошук проєкту...',
         no_results:'Нічого не знайдено за цим запитом.', search_found:(n)=>`Знайдено: ${n}`, filter_all:'Усе', filter_in:'У процесі', filter_fund:'Збір коштів', filter_ea:'Ранній доступ',
         stat_projects:'проєктів у переліку', stat_avg:'середня готовність', stat_early:'ранній доступ', accent_label:'Стиль:', rights:'Усі права захищено.', nav_benefactors:'Доброчинці', benefactors_title:'Доброчинці', benefactors_desc:'Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:', support_title:'Фінансова підтримка', support_text:'Якщо подобається наша робота, можна підтримати нас донатом:', contacts_title:'Контакти', contacts_text:'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.',
-        readiness_overall:'Загальна готовність', readiness_text:'Готовність тексту', readiness_textures:'Готовність текстур', readiness_fonts:'Готовність шрифтів' },
+        readiness_overall:'Загальна готовність', readiness_text:'Готовність тексту', readiness_textures:'Готовність текстур' },
       en:{ title:'“Little Bit” — Ukrainian Game Localizations', meta_desc:'“Little Bit” — Ukrainian localizations of video games: Judgment, Yakuza, No More Heroes.',
         nav_projects:'Our Projects', nav_contacts:'Contacts', nav_support:'Support Us', drawer_title:'Menu', drawer_label:'Mobile menu', open_menu:'Open menu', close_menu:'Close menu',
         pill_subtitle:'UA Localizations', hero_title2:'Play in Ukrainian — feel it anew.', hero_lead:'Your favorite stories — in Ukrainian, from the heart.',
@@ -499,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn_view_projects:'See projects', btn_support:'Support us', status_fundraising:'Status: <strong>fundraising</strong>', raised_prefix:'Raised:', search_label:'Project search', search_placeholder:'Search project…',
         no_results:'No results for this query.', search_found:(n)=>`Found: ${n}`, filter_all:'All', filter_in:'In progress', filter_fund:'Fundraising', filter_ea:'Early access',
         stat_projects:'projects listed', stat_avg:'average progress', stat_early:'early access', accent_label:'Accent:', rights:'All rights reserved.', nav_benefactors:'Benefactors', benefactors_title:'Benefactors', benefactors_desc:'This is a list of everyone who has ever supported our work — we are truly grateful:',
-        readiness_overall:'Overall readiness', readiness_text:'Text readiness', readiness_textures:'Textures readiness', readiness_fonts:'Fonts readiness' }
+        readiness_overall:'Overall readiness', readiness_text:'Text readiness', readiness_textures:'Textures readiness' }
     };
 
     // --- Helpers ---
@@ -513,15 +513,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return 'en';
     }
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-    // Weighted readiness: text > textures > fonts
-    const WEIGHTS = { text: 0.7, textures: 0.2, fonts: 0.1 };
+    // Readiness excludes fonts entirely; weight text > textures
+    const WEIGHTS = { text: 0.78, textures: 0.22, fonts: 0 };
     function pct(v){ return clamp(Math.round(Number(v)||0), 0, 100); }
     function weightedProgress(p){
       const t=pct(p.progress_text), tx=pct(p.progress_textures), f=pct(p.progress_fonts);
       return clamp(Math.round(t*WEIGHTS.text + tx*WEIGHTS.textures + f*WEIGHTS.fonts), 0, 100);
     }
     function readinessParts(p){
-      return { overall: weightedProgress(p), text: pct(p.progress_text), textures: pct(p.progress_textures), fonts: pct(p.progress_fonts) };
+      return { overall: weightedProgress(p), text: pct(p.progress_text), textures: pct(p.progress_textures) };
     }
     function formatUA(n){ return (Number(n)||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
     function norm(s){
@@ -729,10 +729,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="readiness-item">
           <div class="row"><span class="label">${d.readiness_textures}:</span><span class="percent">${parts.textures}%</span></div>
           <div class="progress sm" aria-label="${d.readiness_textures}"><span style="width:${parts.textures}%"></span></div>
-        </div>
-        <div class="readiness-item">
-          <div class="row"><span class="label">${d.readiness_fonts}:</span><span class="percent">${parts.fonts}%</span></div>
-          <div class="progress sm" aria-label="${d.readiness_fonts}"><span style="width:${parts.fonts}%"></span></div>
         </div>`;
       // images carousel
       const images = Array.isArray(p.images_ua)? p.images_ua : [];
