@@ -486,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
         what_we_do_title:'Що ми робимо', li1:'Повна текстова локалізація (інтерфейс, субтитри, навчальні матеріали/туторіали, внутрішньоігрові тексти)',
         li2:'Підтримка та інтеграція шрифтів, технічний супровід', li3:'Художня адаптація з дотриманням чинного українського правопису',
         projects_title:'Наші проєкти', badge_in_progress:'У процесі локалізації', badge_fundraising:'Збір на локалізацію', badge_early_access:'Ранній доступ',
-        btn_download:'Завантажити', btn_sponsor:'Спонсорувати', btn_view_projects:'До проєктів', btn_support:'Підтримати',
+        btn_download:'Завантажити', btn_sponsor:'Спонсорувати', btn_for_sponsors:'Для спонсорів', btn_view_projects:'До проєктів', btn_support:'Підтримати',
         status_fundraising:'Статус: <strong>збір коштів</strong>', raised_prefix:'Зібрано:', search_label:'Пошук проєкту', search_placeholder:'Пошук проєкту...',
         no_results:'Нічого не знайдено за цим запитом.', search_found:(n)=>`Знайдено: ${n}`, filter_all:'Усе', filter_in:'У процесі', filter_fund:'Збір коштів', filter_ea:'Ранній доступ',
         stat_projects:'проєктів у переліку', stat_avg:'середня готовність', stat_early:'ранній доступ', accent_label:'Стиль:', rights:'Усі права захищено.', nav_benefactors:'Доброчинці', benefactors_title:'Доброчинці', benefactors_desc:'Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:', support_title:'Фінансова підтримка', support_text:'Якщо подобається наша робота, можна підтримати нас донатом:', contacts_title:'Контакти', contacts_text:'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.',
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nav_projects:'Our Projects', nav_contacts:'Contacts', nav_support:'Support Us', drawer_title:'Menu', drawer_label:'Mobile menu', open_menu:'Open menu', close_menu:'Close menu',
         pill_subtitle:'UA Localizations', hero_title2:'Play in Ukrainian — feel it anew.', hero_lead:'Your favorite stories — in Ukrainian, from the heart.',
         what_we_do_title:'What We Do', li1:'Full text localization (UI, subtitles, tutorials, in-game materials)', li2:'Font support and technical integration', li3:'Creative adaptation following contemporary Ukrainian orthography',
-        projects_title:'Our Projects', badge_in_progress:'In localization', badge_fundraising:'Fundraising', badge_early_access:'Early Access', btn_download:'Download', btn_sponsor:'Sponsor',
+        projects_title:'Our Projects', badge_in_progress:'In localization', badge_fundraising:'Fundraising', badge_early_access:'Early Access', btn_download:'Download', btn_sponsor:'Sponsor', btn_for_sponsors:'For sponsors',
         btn_view_projects:'See projects', btn_support:'Support us', status_fundraising:'Status: <strong>fundraising</strong>', raised_prefix:'Raised:', search_label:'Project search', search_placeholder:'Search project…',
         no_results:'No results for this query.', search_found:(n)=>`Found: ${n}`, filter_all:'All', filter_in:'In progress', filter_fund:'Fundraising', filter_ea:'Early access',
         stat_projects:'projects listed', stat_avg:'average progress', stat_early:'early access', accent_label:'Accent:', rights:'All rights reserved.', nav_benefactors:'Benefactors', benefactors_title:'Benefactors', benefactors_desc:'This is a list of everyone who has ever supported our work — we are truly grateful:',
@@ -603,7 +603,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const pct = (p.status==='fundraising') ? clamp(Math.round(p.progress||0),0,100) : weightedProgress(p);
       const fundraising = p.status==='fundraising' && (p.goal>0);
       const raisedLabel = fundraising ? `${d.raised_prefix} ${formatUA(p.raised||0)}₴ \\ ${formatUA(p.goal||0)}₴` : null;
-      const label = (p.cta?.label_uk && lang==='uk')? p.cta.label_uk : (p.cta?.label_en && lang==='en')? p.cta.label_en : (lang==='uk'? d.btn_download : 'Download');
+      const label = (p.status === 'early-access')
+        ? d.btn_for_sponsors
+        : ((p.cta?.label_uk && lang==='uk') ? p.cta.label_uk : (p.cta?.label_en && lang==='en') ? p.cta.label_en : (lang==='uk' ? d.btn_download : 'Download'));
       const cls = ['btn']; if (p.cta?.primary) cls.push('primary'); if (p.cta?.animated) cls.push('download-anim'); if (p.cta?.type==='disabled') cls.push('disabled');
       const href = p.cta?.url || '#';
       const attrs = (p.cta?.type==='disabled') ? 'aria-disabled="true" tabindex="-1"' : 'target="_blank" rel="noopener"';
