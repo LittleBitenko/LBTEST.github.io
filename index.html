@@ -602,6 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const desc= lang==='en'? p.desc_en : p.desc_uk;
       const pct = (p.status==='fundraising') ? clamp(Math.round(p.progress||0),0,100) : weightedProgress(p);
       const fundraising = p.status==='fundraising' && (p.goal>0);
+      const overallPct = weightedProgress(p);
       const raisedLabel = fundraising ? `${d.raised_prefix} ${formatUA(p.raised||0)}₴ \\ ${formatUA(p.goal||0)}₴` : null;
       const label = (p.status === 'early-access')
         ? d.btn_for_sponsors
@@ -621,7 +622,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>${p.title}</h3>
             <p>${desc}</p>
             <div class="progress" title="${(lang==='en'?'Progress':'Готовність')} ${pct}%"><span style="width:${pct}%"></span></div>
-            ${fundraising ? `<small style="color:var(--muted)">${raisedLabel}</small>` : `<small style="color:var(--muted)">${(lang==='en'?'Progress:':'Готовність:')} <strong>${pct}%</strong></small>`}
+            ${fundraising
+              ? `<small style="color:var(--muted)">${raisedLabel}</small>`+
+                `<small style="color:var(--muted);display:block">${(lang==='en'?'Progress:':'Готовність:')} <strong>${overallPct}%</strong></small>`
+              : `<small style="color:var(--muted)">${(lang==='en'?'Progress:':'Готовність:')} <strong>${pct}%</strong></small>`}
             <div class="cta"><a class="${cls.join(' ')}" href="${href}" ${attrs}>${label}</a></div>
           </div>
         </article>`;
