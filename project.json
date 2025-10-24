@@ -6,9 +6,9 @@
     "logo": "assets/Dispatch_logo.webp",
     "status": "in-progress",
     "progress": 38,
-    "progress_text": 38,
-    "progress_textures": 38,
-    "progress_fonts": 38,
+    "progress_text": 80,
+    "progress_textures": 0,
+    "progress_fonts": 50,
     "desc_uk": "<strong>Українська локалізація першого епізоду.</strong> Інтерфейс і субтитри.",
     "desc_en": "<strong>Ukrainian localization (episodic game).</strong> UI & subtitles.",
     "cta": {
@@ -29,9 +29,9 @@
     "raised": 75,
     "goal": 35000,
     "progress": 0,
-    "progress_text": 0,
-    "progress_textures": 0,
-    "progress_fonts": 0,
+    "progress_text": 15,
+    "progress_textures": 30,
+    "progress_fonts": 50,
     "desc_uk": "<strong>Збір на українську локалізацію: інтерфейс, субтитри.</strong>",
     "desc_en": "<strong>Fundraising for a Ukrainian localization.</strong> UI and subtitles.",
     "cta": {
@@ -59,9 +59,9 @@
     "raised": 1553,
     "goal": 25000,
     "progress": 0,
-    "progress_text": 0,
+    "progress_text": 2,
     "progress_textures": 0,
-    "progress_fonts": 0,
+    "progress_fonts": 100,
     "desc_uk": "Збір на українську локалізацію: інтерфейс, субтитри.",
     "desc_en": "<strong>Iconic stealth‑action classic by Hideo Kojima (Master Collection).</strong> Fundraising for a Ukrainian localization: UI and subtitles.",
     "cta": {
@@ -85,8 +85,8 @@
     "status": "in-progress",
     "progress": 82,
     "progress_text": 82,
-    "progress_textures": 82,
-    "progress_fonts": 82,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "platforms": [
       "PS3"
     ],
@@ -115,9 +115,9 @@
     "raised": 0,
     "goal": 8000,
     "progress": 0,
-    "progress_text": 0,
+    "progress_text": 2,
     "progress_textures": 0,
-    "progress_fonts": 0,
+    "progress_fonts": 100,
     "desc_uk": "<strong>Збір на українську локалізацію: інтерфейс, субтитри.</strong>",
     "desc_en": "<strong>Fundraising for a Ukrainian localization.</strong> UI and subtitles.",
     "cta": {
@@ -140,9 +140,9 @@
       "Steam"
     ],
     "progress": 50,
-    "progress_text": 0,
+    "progress_text": 50,
     "progress_textures": 0,
-    "progress_fonts": 0,
+    "progress_fonts": 70,
     "goal": 5000,
     "raised": 3500,
     "desc_uk": "<strong>Авторський проєкт SWERY та SUDA51.</strong> Починаємо збір на повну українську локалізацію: інтерфейс, субтитри, туторіали.",
@@ -171,8 +171,8 @@
     ],
     "progress": 4,
     "progress_text": 4,
-    "progress_textures": 4,
-    "progress_fonts": 4,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "desc_uk": "<strong>Повна українська локалізація.</strong> Інтерфейс і субтитри.",
     "desc_en": "<strong>Full Ukrainian localization.</strong> UI & subtitles.",
     "cta": {
@@ -195,8 +195,8 @@
     "status": "early-access",
     "progress": 89,
     "progress_text": 89,
-    "progress_textures": 89,
-    "progress_fonts": 89,
+    "progress_textures": 50,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
@@ -223,8 +223,8 @@
     "status": "in-progress",
     "progress": 6,
     "progress_text": 6,
-    "progress_textures": 6,
-    "progress_fonts": 6,
+    "progress_textures": 0,
+    "progress_fonts": 60,
     "platforms": [
       "Steam"
     ],
@@ -250,8 +250,8 @@
     "status": "in-progress",
     "progress": 15,
     "progress_text": 15,
-    "progress_textures": 15,
-    "progress_fonts": 15,
+    "progress_textures": 0,
+    "progress_fonts": 60,
     "platforms": [
       "Steam"
     ],
@@ -277,8 +277,8 @@
     "status": "in-progress",
     "progress": 60,
     "progress_text": 60,
-    "progress_textures": 60,
-    "progress_fonts": 60,
+    "progress_textures": 30,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
@@ -304,8 +304,8 @@
     "status": "in-progress",
     "progress": 14,
     "progress_text": 14,
-    "progress_textures": 14,
-    "progress_fonts": 14,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
@@ -331,8 +331,8 @@
     "status": "early-access",
     "progress": 86,
     "progress_text": 86,
-    "progress_textures": 86,
-    "progress_fonts": 86,
+    "progress_textures": 50,
+    "progress_fonts": 90,
     "platforms": [
       "Steam"
     ],
@@ -358,7 +358,7 @@
     "status": "early-access",
     "progress": 100,
     "progress_text": 100,
-    "progress_textures": 100,
+    "progress_textures": 40,
     "progress_fonts": 100,
     "platforms": [
       "Steam"
@@ -386,8 +386,8 @@
     "status": "in-progress",
     "progress": 23,
     "progress_text": 23,
-    "progress_textures": 23,
-    "progress_fonts": 23,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
@@ -413,7 +413,7 @@
     "status": "early-access",
     "progress": 100,
     "progress_text": 100,
-    "progress_textures": 100,
+    "progress_textures": 60,
     "progress_fonts": 100,
     "platforms": [
       "Steam",
@@ -442,8 +442,8 @@
     "status": "in-progress",
     "progress": 37,
     "progress_text": 37,
-    "progress_textures": 37,
-    "progress_fonts": 37,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "platforms": [
       "Steam",
       "Nintendo Switch"
@@ -470,8 +470,8 @@
     "status": "in-progress",
     "progress": 15,
     "progress_text": 15,
-    "progress_textures": 15,
-    "progress_fonts": 15,
+    "progress_textures": 0,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
