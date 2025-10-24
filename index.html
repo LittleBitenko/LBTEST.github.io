@@ -134,6 +134,14 @@
     .steam-link:hover{ border-color:rgba(255,255,255,.35) }
     .steam-link svg{ width:18px; height:18px; display:block; fill:currentColor }
     .modal__body{ padding:12px; overflow:auto; display:grid; gap:12px }
+    /* Readiness grid */
+    .readiness-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:12px }
+    @media (max-width:560px){ .readiness-grid{ grid-template-columns: 1fr } }
+    .readiness-item{ padding:12px; border:1px solid var(--brd); border-radius:12px; background:rgba(255,255,255,.05); }
+    .readiness-item .row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px }
+    .readiness-item .label{ font-weight:700; font-size:14px }
+    .readiness-item .percent{ font-weight:800; font-size:14px }
+    .progress.sm{ height:8px }
     .carousel{ position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#0f172a; border:1px solid var(--brd) }
     .carousel img{ width:100%; height:100%; object-fit:cover }
     .carousel .nav{ position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding:0 8px; pointer-events:none }
@@ -453,6 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div id="pmDesc" class="modal__desc"></div>
       <div id="pmLinks" class="modal__links"></div>
       <div class="modal__body">
+        <div id="pmReadiness" class="readiness-grid"></div>
         <div id="pmCarousel" class="carousel" hidden>
           <img id="pmCarouselImg" alt="">
           <div class="nav">
@@ -480,7 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btn_download:'Завантажити', btn_sponsor:'Спонсорувати', btn_view_projects:'До проєктів', btn_support:'Підтримати',
         status_fundraising:'Статус: <strong>збір коштів</strong>', raised_prefix:'Зібрано:', search_label:'Пошук проєкту', search_placeholder:'Пошук проєкту...',
         no_results:'Нічого не знайдено за цим запитом.', search_found:(n)=>`Знайдено: ${n}`, filter_all:'Усе', filter_in:'У процесі', filter_fund:'Збір коштів', filter_ea:'Ранній доступ',
-        stat_projects:'проєктів у переліку', stat_avg:'середня готовність', stat_early:'ранній доступ', accent_label:'Стиль:', rights:'Усі права захищено.', nav_benefactors:'Доброчинці', benefactors_title:'Доброчинці', benefactors_desc:'Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:', support_title:'Фінансова підтримка', support_text:'Якщо подобається наша робота, можна підтримати нас донатом:', contacts_title:'Контакти', contacts_text:'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.'},
+        stat_projects:'проєктів у переліку', stat_avg:'середня готовність', stat_early:'ранній доступ', accent_label:'Стиль:', rights:'Усі права захищено.', nav_benefactors:'Доброчинці', benefactors_title:'Доброчинці', benefactors_desc:'Це — список усіх людей, які коли-небудь підтримали діяльність нашої спілки, ми щиро їм вдячні:', support_title:'Фінансова підтримка', support_text:'Якщо подобається наша робота, можна підтримати нас донатом:', contacts_title:'Контакти', contacts_text:'Маєш питання, хочеш допомогти або запропонувати співпрацю? Пиши нам у Telegram або підписуйся на YouTube.',
+        readiness_overall:'Загальна готовність', readiness_text:'Готовність тексту', readiness_textures:'Готовність текстур', readiness_fonts:'Готовність шрифтів' },
       en:{ title:'“Little Bit” — Ukrainian Game Localizations', meta_desc:'“Little Bit” — Ukrainian localizations of video games: Judgment, Yakuza, No More Heroes.',
         nav_projects:'Our Projects', nav_contacts:'Contacts', nav_support:'Support Us', drawer_title:'Menu', drawer_label:'Mobile menu', open_menu:'Open menu', close_menu:'Close menu',
         pill_subtitle:'UA Localizations', hero_title2:'Play in Ukrainian — feel it anew.', hero_lead:'Your favorite stories — in Ukrainian, from the heart.',
@@ -488,7 +498,8 @@ document.addEventListener('DOMContentLoaded', () => {
         projects_title:'Our Projects', badge_in_progress:'In localization', badge_fundraising:'Fundraising', badge_early_access:'Early Access', btn_download:'Download', btn_sponsor:'Sponsor',
         btn_view_projects:'See projects', btn_support:'Support us', status_fundraising:'Status: <strong>fundraising</strong>', raised_prefix:'Raised:', search_label:'Project search', search_placeholder:'Search project…',
         no_results:'No results for this query.', search_found:(n)=>`Found: ${n}`, filter_all:'All', filter_in:'In progress', filter_fund:'Fundraising', filter_ea:'Early access',
-        stat_projects:'projects listed', stat_avg:'average progress', stat_early:'early access', accent_label:'Accent:', rights:'All rights reserved.', nav_benefactors:'Benefactors', benefactors_title:'Benefactors', benefactors_desc:'This is a list of everyone who has ever supported our work — we are truly grateful:'}
+        stat_projects:'projects listed', stat_avg:'average progress', stat_early:'early access', accent_label:'Accent:', rights:'All rights reserved.', nav_benefactors:'Benefactors', benefactors_title:'Benefactors', benefactors_desc:'This is a list of everyone who has ever supported our work — we are truly grateful:',
+        readiness_overall:'Overall readiness', readiness_text:'Text readiness', readiness_textures:'Textures readiness', readiness_fonts:'Fonts readiness' }
     };
 
     // --- Helpers ---
@@ -502,6 +513,16 @@ document.addEventListener('DOMContentLoaded', () => {
       return 'en';
     }
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    // Weighted readiness: text > textures > fonts
+    const WEIGHTS = { text: 0.7, textures: 0.2, fonts: 0.1 };
+    function pct(v){ return clamp(Math.round(Number(v)||0), 0, 100); }
+    function weightedProgress(p){
+      const t=pct(p.progress_text), tx=pct(p.progress_textures), f=pct(p.progress_fonts);
+      return clamp(Math.round(t*WEIGHTS.text + tx*WEIGHTS.textures + f*WEIGHTS.fonts), 0, 100);
+    }
+    function readinessParts(p){
+      return { overall: weightedProgress(p), text: pct(p.progress_text), textures: pct(p.progress_textures), fonts: pct(p.progress_fonts) };
+    }
     function formatUA(n){ return (Number(n)||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
     function norm(s){
       try {
@@ -579,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const lang=document.documentElement.lang||'uk';
       const d=I18N[lang];
       const desc= lang==='en'? p.desc_en : p.desc_uk;
-      const pct=clamp(Math.round(p.progress||0),0,100);
+      const pct = (p.status==='fundraising') ? clamp(Math.round(p.progress||0),0,100) : weightedProgress(p);
       const fundraising = p.status==='fundraising' && (p.goal>0);
       const raisedLabel = fundraising ? `${d.raised_prefix} ${formatUA(p.raised||0)}₴ \\ ${formatUA(p.goal||0)}₴` : null;
       const label = (p.cta?.label_uk && lang==='uk')? p.cta.label_uk : (p.cta?.label_en && lang==='en')? p.cta.label_en : (lang==='uk'? d.btn_download : 'Download');
@@ -611,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const count = list.length; // how many cards are currently listed (any status)
       const eligible = list.filter(p => p.status === 'in-progress' || p.status === 'early-access');
       const totalEligible = eligible.length;
-      const avg = totalEligible ? Math.round(eligible.reduce((a,p)=>a+(p.progress||0),0)/totalEligible) : 0;
+      const avg = totalEligible ? Math.round(eligible.reduce((a,p)=>a+weightedProgress(p),0)/totalEligible) : 0;
       const ea = list.filter(p=>p.status==='early-access').length;
       const sp=document.getElementById('statProjects'), sa=document.getElementById('statAvg'), se=document.getElementById('statEA');
       if (sp) sp.textContent=count;
@@ -637,13 +658,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const card=e.currentTarget.closest('.card');
           const id=card?.dataset.id; if(!id) return;
           const proj = PROJECTS.find(p=>p.id===id); if (!proj) return;
-          const vids = Array.isArray(proj.videos_ua) ? proj.videos_ua : [];
-          const imgs = Array.isArray(proj.images_ua) ? proj.images_ua : [];
-          if (vids.length===0 && imgs.length===0){
-            // Placeholder action when no media available
-            try { window.location.hash = '#'; } catch(e) {}
-            return;
-          }
           openProjectModal(proj);
         }, { once:false });
       });
@@ -683,6 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const logoEl=document.getElementById('pmLogo');
       const descEl=document.getElementById('pmDesc');
       const linksEl=document.getElementById('pmLinks');
+      const rdEl=document.getElementById('pmReadiness');
       const car=document.getElementById('pmCarousel');
       const carImg=document.getElementById('pmCarouselImg');
       const vids=document.getElementById('pmVideos');
@@ -693,6 +708,26 @@ document.addEventListener('DOMContentLoaded', () => {
       descEl.innerHTML = desc||'';
       // links: Steam
       linksEl.innerHTML = buildSteamLink(p);
+      // readiness grid
+      const parts = readinessParts(p);
+      const d=I18N[lang];
+      rdEl.innerHTML = `
+        <div class="readiness-item">
+          <div class="row"><span class="label">${d.readiness_overall}:</span><span class="percent">${parts.overall}%</span></div>
+          <div class="progress sm" aria-label="${d.readiness_overall}"><span style="width:${parts.overall}%"></span></div>
+        </div>
+        <div class="readiness-item">
+          <div class="row"><span class="label">${d.readiness_text}:</span><span class="percent">${parts.text}%</span></div>
+          <div class="progress sm" aria-label="${d.readiness_text}"><span style="width:${parts.text}%"></span></div>
+        </div>
+        <div class="readiness-item">
+          <div class="row"><span class="label">${d.readiness_textures}:</span><span class="percent">${parts.textures}%</span></div>
+          <div class="progress sm" aria-label="${d.readiness_textures}"><span style="width:${parts.textures}%"></span></div>
+        </div>
+        <div class="readiness-item">
+          <div class="row"><span class="label">${d.readiness_fonts}:</span><span class="percent">${parts.fonts}%</span></div>
+          <div class="progress sm" aria-label="${d.readiness_fonts}"><span style="width:${parts.fonts}%"></span></div>
+        </div>`;
       // images carousel
       const images = Array.isArray(p.images_ua)? p.images_ua : [];
       CAROUSEL_IMAGES = images;

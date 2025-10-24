@@ -6,6 +6,9 @@
     "logo": "assets/Dispatch_logo.webp",
     "status": "in-progress",
     "progress": 38,
+    "progress_text": 38,
+    "progress_textures": 38,
+    "progress_fonts": 38,
     "desc_uk": "<strong>Українська локалізація першого епізоду.</strong> Інтерфейс і субтитри.",
     "desc_en": "<strong>Ukrainian localization (episodic game).</strong> UI & subtitles.",
     "cta": {
@@ -26,6 +29,9 @@
     "raised": 75,
     "goal": 35000,
     "progress": 0,
+    "progress_text": 0,
+    "progress_textures": 0,
+    "progress_fonts": 0,
     "desc_uk": "<strong>Збір на українську локалізацію: інтерфейс, субтитри.</strong>",
     "desc_en": "<strong>Fundraising for a Ukrainian localization.</strong> UI and subtitles.",
     "cta": {
@@ -53,6 +59,9 @@
     "raised": 1553,
     "goal": 25000,
     "progress": 0,
+    "progress_text": 0,
+    "progress_textures": 0,
+    "progress_fonts": 0,
     "desc_uk": "Збір на українську локалізацію: інтерфейс, субтитри.",
     "desc_en": "<strong>Iconic stealth‑action classic by Hideo Kojima (Master Collection).</strong> Fundraising for a Ukrainian localization: UI and subtitles.",
     "cta": {
@@ -75,6 +84,9 @@
     "logo": "assets/Uncharted_logo.webp",
     "status": "in-progress",
     "progress": 82,
+    "progress_text": 82,
+    "progress_textures": 82,
+    "progress_fonts": 82,
     "platforms": [
       "PS3"
     ],
@@ -103,6 +115,9 @@
     "raised": 0,
     "goal": 8000,
     "progress": 0,
+    "progress_text": 0,
+    "progress_textures": 0,
+    "progress_fonts": 0,
     "desc_uk": "<strong>Збір на українську локалізацію: інтерфейс, субтитри.</strong>",
     "desc_en": "<strong>Fundraising for a Ukrainian localization.</strong> UI and subtitles.",
     "cta": {
@@ -125,6 +140,9 @@
       "Steam"
     ],
     "progress": 50,
+    "progress_text": 0,
+    "progress_textures": 0,
+    "progress_fonts": 0,
     "goal": 5000,
     "raised": 3500,
     "desc_uk": "<strong>Авторський проєкт SWERY та SUDA51.</strong> Починаємо збір на повну українську локалізацію: інтерфейс, субтитри, туторіали.",
@@ -152,6 +170,9 @@
       "Steam"
     ],
     "progress": 4,
+    "progress_text": 4,
+    "progress_textures": 4,
+    "progress_fonts": 4,
     "desc_uk": "<strong>Повна українська локалізація.</strong> Інтерфейс і субтитри.",
     "desc_en": "<strong>Full Ukrainian localization.</strong> UI & subtitles.",
     "cta": {
@@ -173,6 +194,9 @@
     "logo": "assets/judgment_logo.webp",
     "status": "early-access",
     "progress": 89,
+    "progress_text": 89,
+    "progress_textures": 89,
+    "progress_fonts": 89,
     "platforms": [
       "Steam"
     ],
@@ -198,6 +222,9 @@
     "logo": "assets/lost_judgment_logo.webp",
     "status": "in-progress",
     "progress": 6,
+    "progress_text": 6,
+    "progress_textures": 6,
+    "progress_fonts": 6,
     "platforms": [
       "Steam"
     ],
@@ -222,6 +249,9 @@
     "logo": "assets/Ishin_Logo.webp",
     "status": "in-progress",
     "progress": 15,
+    "progress_text": 15,
+    "progress_textures": 15,
+    "progress_fonts": 15,
     "platforms": [
       "Steam"
     ],
@@ -246,6 +276,9 @@
     "logo": "assets/yakuza_kiwami2_logo.webp",
     "status": "in-progress",
     "progress": 60,
+    "progress_text": 60,
+    "progress_textures": 60,
+    "progress_fonts": 60,
     "platforms": [
       "Steam"
     ],
@@ -270,6 +303,9 @@
     "logo": "assets/yakuza3_logo.webp",
     "status": "in-progress",
     "progress": 14,
+    "progress_text": 14,
+    "progress_textures": 14,
+    "progress_fonts": 14,
     "platforms": [
       "Steam"
     ],
@@ -294,6 +330,9 @@
     "logo": "assets/no_more_heroes_logo.webp",
     "status": "early-access",
     "progress": 86,
+    "progress_text": 86,
+    "progress_textures": 86,
+    "progress_fonts": 86,
     "platforms": [
       "Steam"
     ],
@@ -318,6 +357,9 @@
     "logo": "assets/no_more_heroes2_logo.webp",
     "status": "early-access",
     "progress": 100,
+    "progress_text": 100,
+    "progress_textures": 100,
+    "progress_fonts": 100,
     "platforms": [
       "Steam"
     ],
@@ -343,6 +385,9 @@
     "logo": "assets/travis_strikes_again_logo.webp",
     "status": "in-progress",
     "progress": 23,
+    "progress_text": 23,
+    "progress_textures": 23,
+    "progress_fonts": 23,
     "platforms": [
       "Steam"
     ],
@@ -367,6 +412,9 @@
     "logo": "assets/no_more_heroes3_logo.webp",
     "status": "early-access",
     "progress": 100,
+    "progress_text": 100,
+    "progress_textures": 100,
+    "progress_fonts": 100,
     "platforms": [
       "Steam",
       "Nintendo Switch"
@@ -393,6 +441,9 @@
     "logo": "assets/DP1_Logo.webp",
     "status": "in-progress",
     "progress": 37,
+    "progress_text": 37,
+    "progress_textures": 37,
+    "progress_fonts": 37,
     "platforms": [
       "Steam",
       "Nintendo Switch"
@@ -418,6 +469,9 @@
     "logo": "assets/DP2_Logo.webp",
     "status": "in-progress",
     "progress": 15,
+    "progress_text": 15,
+    "progress_textures": 15,
+    "progress_fonts": 15,
     "platforms": [
       "Steam"
     ],
