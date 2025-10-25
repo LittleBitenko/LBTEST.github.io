@@ -79,7 +79,14 @@
     .hero .lead{ color:var(--muted); font-size: clamp(16px, 2.1vw, 18px); line-height:1.7 }
     .pill{display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:999px; background: rgba(125,211,252,.10); border:1px solid rgba(125,211,252,.30); color:var(--text); font-weight:700; font-size:12px}
     .cta{display:flex; gap:12px; margin-top:12px; flex-wrap:wrap}
-    .btn{padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); color:var(--text); text-decoration:none; display:inline-flex; gap:10px; align-items:center; transition:transform .2s, background .2s, border-color .2s}
+    
+    .icon-btn{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--text); font-size:18px; line-height:1; cursor:pointer; }
+    .icon-btn:hover{ background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.25); transform:translateY(-1px); }
+    .icon-btn:active{ transform:translateY(0); }
+    /* Deactivate thumb click */
+    .thumb{ cursor:default !important; }
+.btn{padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); color:var(--text); text-decoration:none; display:inline-flex; gap:10px; align-items:center; transition:transform .2s, background .2s, border-color .2s}
     .btn.primary{background:linear-gradient(135deg, rgba(125,211,252,.28), rgba(167,139,250,.28)); border-color: rgba(167,139,250,.55)}
     .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,0.35)}
     .btn.disabled{background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); border:1px solid rgba(255,255,255,0.12); cursor:not-allowed; pointer-events:none; user-select:none;}
@@ -626,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ? `<small style="color:var(--muted)">${raisedLabel}</small>`+
                 `<small style="color:var(--muted);display:block">${(lang==='en'?'Progress:':'Готовність:')} <strong>${overallPct}%</strong></small>`
               : `<small style="color:var(--muted)">${(lang==='en'?'Progress:':'Готовність:')} <strong>${pct}%</strong></small>`}
-            <div class="cta"><a class="${cls.join(' ')}" href="${href}" ${attrs}>${label}</a></div>
+            <div class="cta"><a class="${cls.join(' ')}" href="${href}" ${attrs}>${label}</a><button type="button" class="icon-btn info-btn" title="Додаткова інформація" aria-label="Додаткова інформація про готовність">ℹ️</button></div>
           </div>
         </article>`;
     }
@@ -658,18 +665,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const fn= I18N[document.documentElement.lang||'uk'].search_found;
       if (meta) meta.textContent = (typeof fn==='function'? fn(list.length) : String(fn).replace('{n}', String(list.length)));
       const nr=document.getElementById('noResults'); if (nr) nr.hidden = list.length!==0;
-      // bind click openers
-      grid.querySelectorAll('.card .thumb').forEach(el=>{
-        el.addEventListener('click', (e)=>{
-          const card=e.currentTarget.closest('.card');
-          const id=card?.dataset.id; if(!id) return;
+      // bind click openers (image disabled)
+      // Image click is intentionally disabled per user request.
+      // grid.querySelectorAll('.card .thumb').forEach(el=>{ /* no-op */ });
+      // Bind info icon to open modal
+      grid.querySelectorAll('.card .info-btn').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const card = e.currentTarget.closest('.card');
+          const id = card?.dataset.id; if (!id) return;
           const proj = PROJECTS.find(p=>p.id===id); if (!proj) return;
           openProjectModal(proj);
-        }, { once:false });
+        });
       });
-    }
-
-    // --- Modal logic ---
+    ogic ---
     let CAROUSEL_INDEX=0;
     function setModalOpen(open){
       const modal=document.getElementById('projectModal'); if (!modal) return;
